@@ -1,0 +1,14 @@
+version: '3.8' # 使用するdocker-composeのバージョン
+
+services:
+  ml-pipeline: # サービス名
+    image: ml-pipeline # 使用するイメージ
+    container_name: ml-pipeline # コンテナ名
+    command: /bin/bash # コンテナ起動時に実行するコマンド
+    tty: true # コンテナにttyを割り当てる（対話的な作業が可能になる）
+    volumes:
+      - .:/ml-pipeline # ホストのディレクトリをコンテナにマウント
+    ports:
+      - "8080:80" # ホストのポート8080をコンテナのポート80にフォワEードする
+    env_file:
+      - .env # 環境変数を.envファイルから読み込む
